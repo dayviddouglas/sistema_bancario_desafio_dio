@@ -28,17 +28,33 @@ def criar_conta():
     print("Conta criada com sucesso!")
 
 
-def get_saldo():
+def depositar():
     global saldo
-    saldo_conta = saldo
-    return saldo_conta
+    valor_sacar = float(input("Digite o valor que você deseja depositar...\n "))
+    if (valor_sacar > 0):
+        saldo += valor_sacar
+        print(f"O valor foi depositado com sucesso, seu saldo é de R${saldo:.2f}")
 
-
-def depositar(*, saldo):
-    valor = float(input("Digite o valor que você deseja depositar...\n "))
-    if (valor > 0):
-        saldo += valor
-        print("O valor foi depositado com sucesso!")
+def sacar():
+    global limite
+    global LIMITE_SAQUES
+    global saldo
+    global numero_saques
+    observacao="Para fazer saques, temos um limte por saque de R$500,00 e podendo ser feito apenas 3 saques por dia.\n"
+    print(f"{observacao}")
+    valor_a_sacar= float(input("Digite o valor que deseja sacar...\n"))
+    if(valor_a_sacar<limite and valor_a_sacar<saldo and numero_saques <LIMITE_SAQUES):
+        saldo-=valor_a_sacar
+        print(saldo)
+        numero_saques+=1
+        qtd_restante_saques= LIMITE_SAQUES-numero_saques
+        print(f"Saque realizado com sucesso, seu saldo atual é de R${saldo:.2f} e você tem ainda pode realizar {qtd_restante_saques} saques hoje...\n")
+    elif(numero_saques > LIMITE_SAQUES):
+        print("Você chegou ao limite de saques por hoje...")
+    elif(valor_a_sacar>saldo):
+        print("O valor ao qual você deseja sacar é maior do que o saldo presente na sua conta. ")
+    elif(valor_a_sacar> limite):
+        print(f"Valor de saque desejado é maior que R${limite:.2f},sendo esse o limite por saque.")
 
 
 def conta(*, agencia_usuario, conta_usuario, nome_usuario):
@@ -57,9 +73,9 @@ while (True):
     if (opcao == "c"):
         criar_conta()
     elif (opcao == "d"):
-        depositar(saldo=get_saldo())
+        depositar()
     elif (opcao == "s"):
-        print("Sacou")
+        sacar()
     elif (opcao == "Extrato"):
         print("Extrato")
     elif (opcao == "q"):
