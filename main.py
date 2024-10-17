@@ -30,10 +30,12 @@ def criar_conta():
 
 def depositar():
     global saldo
-    valor_sacar = float(input("Digite o valor que você deseja depositar...\n "))
-    if (valor_sacar > 0):
-        saldo += valor_sacar
+    valor_a_depositar = float(input("Digite o valor que você deseja depositar...\n "))
+    if (valor_a_depositar > 0):
+        saldo += valor_a_depositar
         print(f"O valor foi depositado com sucesso, seu saldo é de R${saldo:.2f}")
+        registrar_processo(processo="Depósito", valor=valor_a_depositar, saldo_momento=saldo)
+
 
 def sacar():
     global limite
@@ -48,6 +50,7 @@ def sacar():
         numero_saques+=1
         qtd_restante_saques= LIMITE_SAQUES-numero_saques
         print(f"Saque realizado com sucesso, seu saldo atual é de R${saldo:.2f} e você tem ainda pode realizar {qtd_restante_saques} saques hoje...\n")
+        registrar_processo(processo="Saque", valor=valor_a_sacar, saldo_momento=saldo)
     elif(numero_saques == LIMITE_SAQUES):
         print("Você chegou ao limite de saques por hoje...")
     elif(valor_a_sacar>saldo):
@@ -57,6 +60,14 @@ def sacar():
     else:
         print("Algo deu errado no processo de saque...")
 
+
+def registrar_processo(*,processo,valor, saldo_momento):
+    global extrato
+    extrato +=f"Foi realizado um {processo} no valor R${valor:.2f} sendo assim o seu saldo de momento é:{saldo_momento:.2f}\n"
+
+def extrato_conta():
+    global extrato
+    print(extrato)
 
 def conta(*, agencia_usuario, conta_usuario, nome_usuario):
     global agencia
@@ -77,8 +88,8 @@ while (True):
         depositar()
     elif (opcao == "s"):
         sacar()
-    elif (opcao == "Extrato"):
-        print("Extrato")
+    elif (opcao == "e"):
+        extrato_conta()
     elif (opcao == "q"):
         print("Você saiu do sistema")
         break
