@@ -23,7 +23,7 @@ def criar_conta():
     agencia_usu = input("Digite a agência:")
     conta_usu = input("Digite a conta:")
     nome_usu = input("Digite como você quer ser chamado...\n")
-    conta(agencia_usuario=agencia_usu,
+    dados_conta(agencia_usuario=agencia_usu,
           conta_usuario=conta_usu, nome_usuario=nome_usu)
     print("Conta criada com sucesso!")
 
@@ -67,9 +67,13 @@ def registrar_processo(*,processo,valor, saldo_momento):
 
 def extrato_conta():
     global extrato
-    print(extrato)
+    global saldo
+    if (extrato==""):
+        print(f"Nenhum processo foi realizado até o momento...\n Seu saldo atual é de R${saldo:.2f}")
+    else:
+        print(extrato)
 
-def conta(*, agencia_usuario, conta_usuario, nome_usuario):
+def dados_conta(*, agencia_usuario, conta_usuario, nome_usuario):
     global agencia
     global nome
     global conta
