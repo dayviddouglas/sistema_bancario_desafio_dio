@@ -11,6 +11,7 @@ Este projeto é uma solução para o desafio de criar um sistema bancário bási
 ## Requisitos
 
 - Python 3.8+
+- Visual Studio Code
 
 ## Instalação
 
