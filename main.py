@@ -1,6 +1,6 @@
 menu = """
    *******************
-    [c] Criar conta
+  
     [d] Depositar
     [s] Sacar
     [e] Extrato
@@ -9,23 +9,14 @@ menu = """
    *******************
     """
 
-agencia = ""
+
 nome = ""
-conta = ""
+
 saldo = 0
 limite = 500
 extrato = ""
 numero_saques = 0
 LIMITE_SAQUES = 3
-
-
-def criar_conta():
-    agencia_usu = input("Digite a agência:")
-    conta_usu = input("Digite a conta:")
-    nome_usu = input("Digite como você quer ser chamado...\n")
-    dados_conta(agencia_usuario=agencia_usu,
-          conta_usuario=conta_usu, nome_usuario=nome_usu)
-    print("Conta criada com sucesso!")
 
 
 def depositar():
@@ -73,23 +64,11 @@ def extrato_conta():
     else:
         print(extrato)
 
-def dados_conta(*, agencia_usuario, conta_usuario, nome_usuario):
-    global agencia
-    global nome
-    global conta
-    global saldo
-    agencia = agencia_usuario
-    conta = conta_usuario
-    nome = nome_usuario
-    return {"agencia": agencia, "conta": conta, "nome": nome, "saldo": saldo}
-
 
 while (True):
     opcao = input(menu)
-    if (opcao == "c"):
-        criar_conta()
-    elif (opcao == "d"):
-        depositar()
+    if (opcao == "d"):
+        depositar()       
     elif (opcao == "s"):
         sacar()
     elif (opcao == "e"):
