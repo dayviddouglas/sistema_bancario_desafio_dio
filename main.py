@@ -11,7 +11,6 @@ menu = """
 
 
 nome = ""
-
 saldo = 0
 limite = 500
 extrato = ""
@@ -36,7 +35,7 @@ def sacar():
     observacao="Para fazer saques, temos um limte por saque de R$500,00 e podendo ser feito apenas 3 saques por dia.\n"
     print(f"{observacao}")
     valor_a_sacar= float(input("Digite o valor que deseja sacar...\n"))
-    if(valor_a_sacar<limite and valor_a_sacar<saldo and numero_saques <LIMITE_SAQUES):
+    if(valor_a_sacar<=limite and valor_a_sacar<saldo and numero_saques <LIMITE_SAQUES):
         saldo-=valor_a_sacar
         numero_saques+=1
         qtd_restante_saques= LIMITE_SAQUES-numero_saques
